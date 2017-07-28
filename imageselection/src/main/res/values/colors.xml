@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bottom_bg">#aaaaaa</color>
+
+    <!-- album list-->
+    <color name="album_title_text">#DE000000</color>
+    <color name="album_count_text">#999999</color>
+    <color name="album_placeholder">#EAEEF4</color>
+    <!-- checkView-->
+    <color name="item_checkCircle_borderColor">#FFFFFF</color>
+    <!--preview-->
+    <color name="preview_bottom_toolbar_bg">#CC000000</color>
+    <color name="preview_bottom_size">#CC000000</color>
+
+    <color name="half_white">#CCFFFFFF</color>
+</resources>

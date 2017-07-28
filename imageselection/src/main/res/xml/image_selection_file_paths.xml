@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="images" path="images/" />
+    <!--对应 Context.getFilesDir() 的路径地址-->
+    <cache-path name="cache_images" path="cache_images/" />
+    <!--对应  getCacheDir()的路径地址-->
+    <external-path name="my_images" path="my_images/"/>
+    <!--对应 Environment.getExternalStorageDirectory()的路径地址-->
+
+    <root-path name="image_selection" path="" />
+    <!-- 对应Context#getExternalFilesDir(String) Context.getExternalFilesDir(null) 返回的路径地址-->
+
+</PreferenceScreen>

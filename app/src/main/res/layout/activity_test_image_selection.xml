@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_pick"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:text="pick"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+        <CheckBox
+            android:id="@+id/cb_gif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否需要gif"/>
+        <CheckBox
+            android:id="@+id/cb_translucent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="沉浸式状态栏"/>
+        <CheckBox
+            android:id="@+id/cb_show_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否显示相机"/>
+        <CheckBox
+            android:id="@+id/cb_save_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否存放在公共空间"/>
+        <EditText
+            android:id="@+id/et_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="最大选择图片数量"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/et_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="主题色"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/et_selectword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="选择语"
+            android:inputType="number"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_selected_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+        <ImageView
+            android:id="@+id/img_select"
+            android:layout_width="160dp"
+            android:layout_height="200dp"/>
+        <ImageView
+            android:id="@+id/img_compressed"
+            android:layout_width="160dp"
+            android:layout_height="200dp"/>
+    </LinearLayout>
+
+</LinearLayout>
