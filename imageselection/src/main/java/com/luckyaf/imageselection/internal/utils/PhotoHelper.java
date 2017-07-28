@@ -29,7 +29,7 @@ import java.util.Locale;
  */
 @SuppressWarnings("unused")
 public class PhotoHelper {
-    private static final String PROVIDER = ".provider";
+    private static final String PROVIDER = "com.luckyaf.imageselection.provider";
     private final WeakReference<Activity> mContext;
     private final WeakReference<Fragment> mFragment;
     private Uri mCurrentPhotoUri;
@@ -75,8 +75,7 @@ public class PhotoHelper {
                 }
                 if (photoFile != null) {
                     mCurrentPhotoPath = photoFile.getAbsolutePath();
-                    mCurrentPhotoUri = FileProvider.getUriForFile(mContext.get(),
-                            mContext.get().getPackageName() + PROVIDER, photoFile);
+                    mCurrentPhotoUri = FileProvider.getUriForFile(mContext.get(), PROVIDER, photoFile);
                     captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCurrentPhotoUri);
                     captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

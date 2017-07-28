@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.luckyaf.imageselection">
 
 
@@ -18,13 +19,15 @@
         <activity android:name=".internal.ui.SelectedPreviewActivity"
                   android:theme="@style/BaseAppTheme"/>
         <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:name=".internal.utils.ImageSelectionFileProvider"
+            android:authorities="com.luckyaf.imageselection.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="name,authorities,exported,grantUriPermissions">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/image_selection_file_paths"/>
+                android:resource="@xml/image_selection_file_paths"
+                tools:replace="name,resource" />
         </provider>
     </application>
 
