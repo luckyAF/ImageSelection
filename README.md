@@ -8,7 +8,6 @@
 
 ## 使用：
 
-`
 
     ImageSelection.getInstance()
                     .from(this)
@@ -27,7 +26,6 @@
                         })
                     .start();
  
-`
 
 ## TODO:
 1. 选中图片后的编辑功能
