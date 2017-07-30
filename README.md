@@ -4,11 +4,11 @@
 ## 优点：
 1. 可自定义主题色
 2. 可同时选择拍照和图库照片（即拍一张照后 再选几张图库的图片）
-3. 无需设置onActivityResult 通过回调获取图片
+3. 无需设置onActivityResult 通过回调获取图片
 
 ## 使用：
 
-`
+`
 
     ImageSelection.getInstance()
                     .from(this)
