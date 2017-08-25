@@ -6,6 +6,11 @@
 2. 可同时选择拍照和图库照片（即拍一张照后 再选几张图库的图片）
 3. 无需设置onActivityResult 通过回调获取图片
 
+## 导入工程
+`
+compile 'com.luckyaf:imageselection:1.0.0'
+`
+
 ## 使用：
 
 
@@ -28,6 +33,6 @@
  
 
 ## TODO:
-1. 选中图片后的编辑功能
-2. 上传改项目至bintray
+- [ ] 选中图片后的编辑功能
+- [x] 上传改项目至bintray
 
