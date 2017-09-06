@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="是否存放在公共空间"/>
         <EditText
+            android:visibility="gone"
             android:id="@+id/et_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -65,6 +65,7 @@ public class PhotoHelper {
 
     public void dispatchCaptureIntent(Context context, int requestCode) {
         if(hasCameraFeature(context)) {
+
             Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (captureIntent.resolveActivity(context.getPackageManager()) != null) {
                 File photoFile = null;

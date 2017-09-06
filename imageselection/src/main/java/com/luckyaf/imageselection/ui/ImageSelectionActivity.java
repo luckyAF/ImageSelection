@@ -13,10 +13,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.luckyaf.imageselection.ImageData;
 import com.luckyaf.imageselection.internal.entity.IncapableCause;
@@ -49,6 +51,7 @@ public class ImageSelectionActivity extends AppCompatActivity implements
     private static final int REQUEST_CODE_PREVIEW = 23;
     private static final int REQUEST_CODE_CAPTURE = 24;
     private static final int STORAGE_REQUEST_CODE = 25;
+    private static final int CAMERA_REQUEST_CODE = 26;
 
     private AlbumCollection mAlbumCollection = new AlbumCollection();
     private SelectedItemCollection mSelectedItemCollection = new SelectedItemCollection(this);
@@ -130,6 +133,7 @@ public class ImageSelectionActivity extends AppCompatActivity implements
             return;
 
         if (requestCode == REQUEST_CODE_PREVIEW) {
+            Log.d("onActivityResult","requestCode   REQUEST_CODE_PREVIEW");
             Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
             ArrayList<Uri> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.STATE_SELECTION);
             if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {
@@ -152,6 +156,7 @@ public class ImageSelectionActivity extends AppCompatActivity implements
                 updateBottomToolbar();
             }
         } else if (requestCode == REQUEST_CODE_CAPTURE) {
+            Log.d("onActivityResult","requestCode   REQUEST_CODE_CAPTURE");
             // Just pass the data back to previous calling Activity.
             Uri contentUri = mPhotoHelper.getCurrentPhotoUri();
             mSelectedItemCollection.add(contentUri);
@@ -264,8 +269,15 @@ public class ImageSelectionActivity extends AppCompatActivity implements
 
     @Override
     public void capture() {
-        if(mPhotoHelper != null){
-            mPhotoHelper.dispatchCaptureIntent(this, REQUEST_CODE_CAPTURE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    CAMERA_REQUEST_CODE);
+            Toast.makeText(this, getString(R.string.permission_camera_denied), Toast.LENGTH_SHORT).show();
+        }else {
+            if (mPhotoHelper != null) {
+                mPhotoHelper.dispatchCaptureIntent(this, REQUEST_CODE_CAPTURE);
+            }
         }
     }
 
@@ -312,6 +324,16 @@ public class ImageSelectionActivity extends AppCompatActivity implements
                 } else {
                     IncapableCause cause = new IncapableCause(IncapableCause.TOAST, getString(R.string.permission_storage_denied));
                     IncapableCause.handleCause(this, cause);
+                }
+                break;
+            case CAMERA_REQUEST_CODE:
+                if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+                    //如果用户赋予权限，则调用相机
+                    if (mPhotoHelper != null) {
+                        mPhotoHelper.dispatchCaptureIntent(this, REQUEST_CODE_CAPTURE);
+                    }
+                } else {
+                    Toast.makeText(this, getString(R.string.permission_camera_denied), Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
