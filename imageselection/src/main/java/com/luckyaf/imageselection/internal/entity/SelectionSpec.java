@@ -100,7 +100,7 @@ public final class SelectionSpec {
         translucent = true;
         titleWord ="选择图片";
         selectWord = "确认";
-        savePublic = true;
+        savePublic = false;
         imageLoader = new GlideLoader();
     }
 

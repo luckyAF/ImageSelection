@@ -37,7 +37,6 @@ public class TestImageSelectionActivity extends AppCompatActivity implements Vie
         cbGif = (CheckBox)findViewById(R.id.cb_gif);
         cbTranslucent = (CheckBox)findViewById(R.id.cb_translucent);
         cbCamera = (CheckBox)findViewById(R.id.cb_show_camera);
-        cbPublic = (CheckBox)findViewById(R.id.cb_save_public);
         editTextNum = (EditText)findViewById(R.id.et_number);
 
         button.setOnClickListener(this);
@@ -52,7 +51,6 @@ public class TestImageSelectionActivity extends AppCompatActivity implements Vie
                         .from(this)
                         .capture(cbCamera.isChecked())
                         .needGif(cbGif.isChecked())
-                        .savePublic(cbPublic.isChecked())
                         .translucent(cbTranslucent.isChecked())
                         .maxSelectable(9)
                         .themeColor(Color.parseColor("#1E8AE8"))

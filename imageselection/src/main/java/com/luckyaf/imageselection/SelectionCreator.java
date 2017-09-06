@@ -85,7 +85,7 @@ public class SelectionCreator {
         return this;
     }
 
-    public SelectionCreator savePublic(boolean savePublic){
+    private SelectionCreator savePublic(boolean savePublic){
         mSelectionSpec.savePublic = savePublic;
         return this;
     }
