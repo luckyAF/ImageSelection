@@ -79,7 +79,9 @@ public class PhotoMetadataUtils {
             w = imageSize.y;
             h = imageSize.x;
         }
-        if (h == 0) return new Point(MAX_WIDTH, MAX_WIDTH);
+        if (h == 0) {
+            return new Point(MAX_WIDTH, MAX_WIDTH);
+        }
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float screenWidth = (float) metrics.widthPixels;

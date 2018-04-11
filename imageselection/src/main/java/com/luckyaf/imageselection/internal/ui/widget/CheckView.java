@@ -112,6 +112,7 @@ public class CheckView extends View {
         invalidate();
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         if (mEnabled != enabled) {
             mEnabled = enabled;

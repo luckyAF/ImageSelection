@@ -41,6 +41,7 @@ public class ImageData {
         }
     }
 
+    @Override
     public String toString(){
         StringBuilder imageData = new StringBuilder();
         for (Uri uri :mImages){

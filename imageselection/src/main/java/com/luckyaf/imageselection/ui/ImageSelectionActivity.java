@@ -129,8 +129,9 @@ public class ImageSelectionActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
+        if (resultCode != RESULT_OK) {
             return;
+        }
 
         if (requestCode == REQUEST_CODE_PREVIEW) {
             Log.d("onActivityResult","requestCode   REQUEST_CODE_PREVIEW");

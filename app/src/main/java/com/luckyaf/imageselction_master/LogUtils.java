@@ -198,16 +198,25 @@ public final class  LogUtils {
     }
 
     private static void log(final int type, String tag, final Object... contents) {
-        if (!sLogSwitch || (!sLog2ConsoleSwitch && !sLog2FileSwitch)) return;
+        if(!BuildConfig.DEBUG || !sLogSwitch){
+            return;
+        }
+        if(!sLog2ConsoleSwitch && !sLog2FileSwitch) {
+            return;
+        }
         int type_low = type & 0x0f, type_high = type & 0xf0;
-        if (type_low < sConsoleFilter && type_low < sFileFilter) return;
+        if (type_low < sConsoleFilter && type_low < sFileFilter) {
+            return;
+        }
         final String[] tagAndHead = processTagAndHead(tag);
         String body = processBody(type_high, contents);
         if (sLog2ConsoleSwitch && type_low >= sConsoleFilter) {
             print2Console(type_low, tagAndHead[0], tagAndHead[1] + body);
         }
         if (sLog2FileSwitch || type_high == FILE) {
-            if (type_low >= sFileFilter) print2File(type_low, tagAndHead[0], tagAndHead[2] + body);
+            if (type_low >= sFileFilter) {
+                print2File(type_low, tagAndHead[0], tagAndHead[2] + body);
+            }
         }
     }
 
@@ -319,7 +328,9 @@ public final class  LogUtils {
         } else {
             print(type, tag, msg);
         }
-        if (sLogBorderSwitch) print(type, tag, BOTTOM_BORDER);
+        if (sLogBorderSwitch) {
+            print(type, tag, BOTTOM_BORDER);
+        }
     }
 
     private static void print(final int type, final String tag, String msg) {
@@ -327,7 +338,9 @@ public final class  LogUtils {
     }
 
     private static String addLeftBorder(String msg) {
-        if (!sLogBorderSwitch) return msg;
+        if (!sLogBorderSwitch) {
+            return msg;
+        }
         StringBuilder sb = new StringBuilder();
         String[] lines = msg.split(LINE_SEP);
         for (String line : lines) {
@@ -383,8 +396,12 @@ public final class  LogUtils {
 
     private static boolean createOrExistsFile(String filePath) {
         File file = new File(filePath);
-        if (file.exists()) return file.isFile();
-        if (!createOrExistsDir(file.getParentFile())) return false;
+        if (file.exists()) {
+            return file.isFile();
+        }
+        if (!createOrExistsDir(file.getParentFile())) {
+            return false;
+        }
         try {
             return file.createNewFile();
         } catch (IOException e) {
@@ -398,7 +415,9 @@ public final class  LogUtils {
     }
 
     private static boolean isSpace(String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

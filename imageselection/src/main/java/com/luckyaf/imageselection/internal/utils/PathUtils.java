@@ -103,8 +103,9 @@ public class PathUtils {
                 return cursor.getString(columnIndex);
             }
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return null;
     }
