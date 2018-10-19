@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+
 import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.luckyaf.imageselection.imageLoader.ImageLoader;
 
 /**
@@ -15,46 +17,62 @@ import com.luckyaf.imageselection.imageLoader.ImageLoader;
  * @author Created by luckyAF on 2017/7/18
  */
 
-public class GlideLoader implements ImageLoader{
+public class GlideLoader implements ImageLoader {
 
     @Override
     public void loadThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri uri) {
-        Glide.with(context)
-                .load(uri)
-                .asBitmap()  // some .jpeg files are actually gif
-                .placeholder(placeholder)
-                .override(resize, resize)
+
+        RequestOptions options = new RequestOptions()
                 .centerCrop()
+                .placeholder(placeholder)
+                .override(resize, resize);
+
+        Glide.with(context)
+                .asBitmap()
+                .load(uri)
+                //.asBitmap()  // some .jpeg files are actually gif
+                .apply(options)
                 .into(imageView);
     }
 
     @Override
     public void loadGifThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri uri) {
-        Glide.with(context)
-                .load(uri)
-                .asBitmap()
-                .placeholder(placeholder)
-                .override(resize, resize)
+        RequestOptions options = new RequestOptions()
                 .centerCrop()
+                .placeholder(placeholder)
+                .override(resize, resize);
+
+        Glide.with(context)
+                .asGif()
+                .load(uri)
+                //.asBitmap()  // some .jpeg files are actually gif
+                .apply(options)
                 .into(imageView);
     }
 
     @Override
     public void loadImage(Context context, int resizeX, int resizeY, ImageView imageView, Uri uri) {
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(resizeX, resizeY);
+
         Glide.with(context)
                 .load(uri)
-                .override(resizeX, resizeY)
-                .priority(Priority.HIGH)
+                //.asBitmap()  // some .jpeg files are actually gif
+                .apply(options)
                 .into(imageView);
     }
 
     @Override
     public void loadGifImage(Context context, int resizeX, int resizeY, ImageView imageView, Uri uri) {
-        Glide.with(context)
-                .load(uri)
-                .asGif()
-                .override(resizeX, resizeY)
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
                 .priority(Priority.HIGH)
+                .override(resizeX, resizeY);
+        Glide.with(context)
+                .asGif()
+                .load(uri)
+                .apply(options)
                 .into(imageView);
     }
 

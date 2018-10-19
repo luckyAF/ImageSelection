@@ -38,7 +38,6 @@ import com.luckyaf.imageselection.internal.entity.Item;
 import com.luckyaf.imageselection.internal.model.SelectedItemCollection;
 import com.luckyaf.imageselection.internal.ui.ImageSelectionFragment;
 import com.luckyaf.imageselection.internal.ui.adapter.AlbumImageAdapter;
-import com.luckyaf.imageselection.internal.utils.RxBus;
 
 import java.util.ArrayList;
 
@@ -52,6 +51,8 @@ public class ImageSelectionActivity extends AppCompatActivity implements
     private static final int REQUEST_CODE_CAPTURE = 24;
     private static final int STORAGE_REQUEST_CODE = 25;
     private static final int CAMERA_REQUEST_CODE = 26;
+
+    public static final String IMAGE_DATA = "image_data";
 
     private AlbumCollection mAlbumCollection = new AlbumCollection();
     private SelectedItemCollection mSelectedItemCollection = new SelectedItemCollection(this);
@@ -129,22 +130,20 @@ public class ImageSelectionActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
+        if (resultCode != RESULT_OK) {
             return;
-
+        }
         if (requestCode == REQUEST_CODE_PREVIEW) {
             Log.d("onActivityResult","requestCode   REQUEST_CODE_PREVIEW");
             Bundle resultBundle = data.getBundleExtra(BasePreviewActivity.EXTRA_RESULT_BUNDLE);
             ArrayList<Uri> selected = resultBundle.getParcelableArrayList(SelectedItemCollection.STATE_SELECTION);
             if (data.getBooleanExtra(BasePreviewActivity.EXTRA_RESULT_APPLY, false)) {
-                ArrayList<Uri> selectedUris = new ArrayList<>();
-                if (selected != null) {
-                    for (Uri uri : selected) {
-                        selectedUris.add(uri);
-                    }
-                }
-                ImageData imageData = new ImageData(selectedUris);
-                RxBus.getInstance().post(imageData);
+
+                ImageData imageData = new ImageData(selected);
+
+                Intent intent = new Intent();
+                intent.putExtra(IMAGE_DATA,imageData);
+                setResult(RESULT_OK,intent);
                 finish();
             } else {
                 mSelectedItemCollection.overwrite(selected);
@@ -193,21 +192,26 @@ public class ImageSelectionActivity extends AppCompatActivity implements
         //library 里面不能 switch 资源id
         if(v.getId() == R.id.img_back){
             onBackPressed();
-        }else if(v.getId() == R.id.txt_preview){//预览
+        }else if(v.getId() == R.id.txt_preview){
+            //预览
             Intent intent = new Intent(this, SelectedPreviewActivity.class);
             intent.putExtra(BasePreviewActivity.EXTRA_DEFAULT_BUNDLE, mSelectedItemCollection.getDataWithBundle());
             startActivityForResult(intent, REQUEST_CODE_PREVIEW);
 
-        }else if(v.getId() == R.id.txt_confirm){//选择
+        }else if(v.getId() == R.id.txt_confirm){
+            //选择
             ImageData imageData = new ImageData(mSelectedItemCollection.asList());
-            RxBus.getInstance().post(imageData);
+            Intent intent = new Intent();
+            intent.putExtra(IMAGE_DATA,imageData);
+            setResult(RESULT_OK,intent);
             finish();
         }
     }
 
     @Override
     public void onBackPressed() {
-        RxBus.getInstance().post(new NoImageBack());
+
+        setResult(RESULT_CANCELED);
         super.onBackPressed();
     }
 

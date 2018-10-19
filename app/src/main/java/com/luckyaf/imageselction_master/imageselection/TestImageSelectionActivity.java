@@ -50,16 +50,16 @@ public class TestImageSelectionActivity extends AppCompatActivity implements Vie
                 ImageSelection.getInstance()
                         .from(this)
                         .capture(cbCamera.isChecked())
-                        .needGif(cbGif.isChecked())
+                        .needGif(false)
                         .translucent(cbTranslucent.isChecked())
                         .maxSelectable(9)
                         .themeColor(Color.parseColor("#1E8AE8"))
-                        .selectWord("发送")
+                        .selectWord("确定")
                         .getImage(new SelectionCreator.ImageGetter() {
                             @Override
                             public void getImageSuccess(ImageData imageData) {
                                 mTextView.setText(imageData.toString());
-                                Toast.makeText(mContext,"size" + imageData.size(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext,"size " + imageData.size(),Toast.LENGTH_SHORT).show();
                                 ((ImageView)findViewById(R.id.img_select)).setImageURI(imageData.getImage());
                             }
                         })

@@ -1,7 +1,7 @@
 package com.luckyaf.imageselection;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 /**
  * 类描述：
@@ -10,22 +10,23 @@ import android.support.v4.app.Fragment;
  */
 
 public class ImageSelection {
-    private ImageSelection(){
+    private ImageSelection() {
     }
 
-    public static ImageSelection getInstance(){
+    public static ImageSelection getInstance() {
         return ImageSelectionHolder.INSTANCE;
     }
 
-    public SelectionCreator from(Activity activity){
+    public SelectionCreator from(FragmentActivity activity) {
         return new SelectionCreator(activity);
     }
 
-    public SelectionCreator from(Fragment fragment){
+    public SelectionCreator from(Fragment fragment) {
         return new SelectionCreator(fragment);
     }
 
-    private final static class ImageSelectionHolder{
+
+    private final static class ImageSelectionHolder {
         private static final ImageSelection INSTANCE = new ImageSelection();
     }
 

@@ -1,7 +1,10 @@
 package com.luckyaf.imageselection;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +14,18 @@ import java.util.List;
  * @author Created by luckyAF on 2017/7/27
  */
 @SuppressWarnings("unused")
-public class ImageData {
+public class ImageData implements Parcelable {
     private ArrayList<Uri> mImages = new ArrayList<>();
+
     public ImageData(List<Uri> uris){
         mImages.addAll(uris);
     }
+
+    protected ImageData(Parcel in) {
+        mImages = in.createTypedArrayList(Uri.CREATOR);
+    }
+
+
 
     public int size(){
         return mImages.size();
@@ -41,11 +51,34 @@ public class ImageData {
         }
     }
 
+    @Override
     public String toString(){
         StringBuilder imageData = new StringBuilder();
         for (Uri uri :mImages){
             imageData.append(uri).append("\n");
         }
         return imageData.toString();
+    }
+
+    public static final Creator<ImageData> CREATOR = new Creator<ImageData>() {
+        @Override
+        public ImageData createFromParcel(Parcel in) {
+            return new ImageData(in);
+        }
+
+        @Override
+        public ImageData[] newArray(int size) {
+            return new ImageData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(mImages);
     }
 }
