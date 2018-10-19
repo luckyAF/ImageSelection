@@ -11,8 +11,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v4.os.BuildCompat;
 import android.support.v4.os.EnvironmentCompat;
 import android.widget.Toast;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +31,6 @@ import java.util.Locale;
  */
 @SuppressWarnings("unused")
 public class PhotoHelper {
-    private static final String PROVIDER = "com.luckyaf.imageselection.provider";
     private final WeakReference<Activity> mContext;
     private final WeakReference<Fragment> mFragment;
     private Uri mCurrentPhotoUri;
@@ -76,7 +77,7 @@ public class PhotoHelper {
                 }
                 if (photoFile != null) {
                     mCurrentPhotoPath = photoFile.getAbsolutePath();
-                    mCurrentPhotoUri = FileProvider.getUriForFile(mContext.get(), PROVIDER, photoFile);
+                    mCurrentPhotoUri = FileProvider.getUriForFile(mContext.get(), ProviderUtil.getFileProviderName(mContext.get()), photoFile);
                     captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCurrentPhotoUri);
                     captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

@@ -3,6 +3,7 @@ package com.luckyaf.imageselection.internal.ui;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.luckyaf.imageselection.internal.entity.Album;
 import com.luckyaf.imageselection.internal.entity.Item;
@@ -46,7 +47,7 @@ public class ImagePreviewActivity extends  BasePreviewActivity implements
     public void onAlbumImageLoad(Cursor cursor) {
         List<Item> items = new ArrayList<>();
         while (cursor.moveToNext()) {
-            items.add(Item.valueOf(cursor));
+           items.add(Item.valueOf(cursor));
         }
         PreviewPagerAdapter adapter = (PreviewPagerAdapter) mPager.getAdapter();
         adapter.addAllItems(items);

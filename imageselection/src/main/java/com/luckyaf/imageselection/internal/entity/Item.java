@@ -7,8 +7,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.luckyaf.imageselection.ImageType;
+
+import java.util.logging.Logger;
 
 /**
  * 类描述：单个图片
@@ -40,6 +43,7 @@ public class Item implements Parcelable {
     private Item(long id, String mimeType, long size) {
         this.id = id;
         this.mimeType = mimeType;
+        Log.d("Image mimeType",mimeType);
         Uri contentUri;
         if (isImage()) {
             contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
@@ -56,6 +60,7 @@ public class Item implements Parcelable {
         mimeType = source.readString();
         uri = source.readParcelable(Uri.class.getClassLoader());
         size = source.readLong();
+
     }
 
     public static Item valueOf(Cursor cursor) {

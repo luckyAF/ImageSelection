@@ -115,7 +115,7 @@ public class PhotoMetadataUtils {
     }
 
 
-    private static boolean isSelectableType(Context context, Item item) {
+    public static boolean isSelectableType(Context context, Item item) {
         if (context == null) {
             return false;
         }

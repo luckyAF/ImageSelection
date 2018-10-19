@@ -21,7 +21,7 @@
                   android:theme="@style/BaseAppTheme"/>
         <provider
             android:name=".internal.utils.ImageSelectionFileProvider"
-            android:authorities="com.luckyaf.imageselection.provider"
+            android:authorities="${applicationId}.ImageProvider"
             android:exported="false"
             android:grantUriPermissions="true"
             tools:replace="name,authorities,exported,grantUriPermissions">

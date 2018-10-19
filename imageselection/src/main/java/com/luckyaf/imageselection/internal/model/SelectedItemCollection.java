@@ -108,7 +108,6 @@ public class SelectedItemCollection {
                     maxSelectable);
             return new IncapableCause(cause);
         }
-
         return null;
     }
 

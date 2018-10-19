@@ -85,6 +85,8 @@ public class AlbumImageLoader extends CursorLoader {
         }
         MatrixCursor dummy = new MatrixCursor(PROJECTION);
         dummy.addRow(new Object[]{Item.ITEM_ID_CAPTURE, Item.ITEM_DISPLAY_NAME_CAPTURE, "", 0, 0});
+
+
         return new MergeCursor(new Cursor[]{dummy, result});
     }
 
