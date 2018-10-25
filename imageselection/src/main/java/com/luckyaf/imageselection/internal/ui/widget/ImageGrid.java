@@ -96,7 +96,7 @@ public class ImageGrid extends SquareFrameLayout implements View.OnClickListener
     }
 
     private void setImage() {
-        if (mMedia.isGif()) {
+        if (mMedia.isGif() && SelectionSpec.getInstance().needGif) {
             SelectionSpec.getInstance().imageLoader.loadGifThumbnail(getContext(), mPreBindInfo.mResize,
                     mPreBindInfo.mPlaceholder, mThumbnail, mMedia.getContentUri());
         } else {

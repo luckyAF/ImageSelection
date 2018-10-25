@@ -30,7 +30,6 @@ public class GlideLoader implements ImageLoader {
         Glide.with(context)
                 .asBitmap()
                 .load(uri)
-                //.asBitmap()  // some .jpeg files are actually gif
                 .apply(options)
                 .into(imageView);
     }
@@ -57,6 +56,7 @@ public class GlideLoader implements ImageLoader {
                 .override(resizeX, resizeY);
 
         Glide.with(context)
+            .asBitmap()
                 .load(uri)
                 //.asBitmap()  // some .jpeg files are actually gif
                 .apply(options)
