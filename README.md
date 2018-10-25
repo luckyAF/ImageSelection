@@ -8,7 +8,7 @@
 
 ## 导入工程
 `
-compile 'com.luckyaf:imageselection:1.2.2'
+compile 'com.luckyaf:imageselection:1.2.22'
 `
 
 ## 使用：
