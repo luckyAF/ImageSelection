@@ -8,7 +8,7 @@ def gitUrl = 'https://github.com/luckyAF/ImageSelection.git'   //Git仓库的地
 
 group = "com.luckyaf"//发布aar前缀根节点
 
-version = "1.2.31"//发布aar的库版本
+version = "1.2.33"//发布aar的库版本
 
 android {
     compileSdkVersion 28
@@ -17,7 +17,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 10
+        versionCode 12
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

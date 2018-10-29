@@ -17,6 +17,17 @@ public class ImageSelection {
         return ImageSelectionHolder.INSTANCE;
     }
 
+
+
+    public static PhotoCapturer getPhoto(FragmentActivity activity){
+        return new PhotoCapturer(activity);
+    }
+
+
+    public static PhotoCapturer getPhoto(Fragment fragment){
+        return new PhotoCapturer(fragment);
+    }
+
     public SelectionCreator from(FragmentActivity activity) {
         return new SelectionCreator(activity);
     }

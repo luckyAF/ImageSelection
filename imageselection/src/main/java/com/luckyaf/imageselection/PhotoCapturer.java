@@ -53,7 +53,6 @@ public class PhotoCapturer {
         return this;
     }
 
-    @RequiresPermission(Manifest.permission.CAMERA)
     public void start(){
         //获取系統版本
         int currentapiVersion = Build.VERSION.SDK_INT;
