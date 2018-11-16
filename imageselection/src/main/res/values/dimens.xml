@@ -4,4 +4,5 @@
     <dimen name="image_grid_spacing">2dp</dimen>
 
     <dimen name="album_item_height">72dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

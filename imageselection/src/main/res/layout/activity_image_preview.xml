@@ -4,7 +4,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/black">
 
-    <com.luckyaf.imageselection.internal.ui.widget.PreviewViewPager
+    <com.luckyaf.imageselection.widget.PreviewViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,7 +50,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <com.luckyaf.imageselection.internal.ui.widget.CheckView
+                    <com.luckyaf.imageselection.widget.CheckView
                         android:id="@+id/check_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

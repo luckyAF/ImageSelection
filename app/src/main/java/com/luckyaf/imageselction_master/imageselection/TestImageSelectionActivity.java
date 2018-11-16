@@ -1,7 +1,6 @@
 package com.luckyaf.imageselction_master.imageselection;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luckyaf.imageselction_master.R;
-import com.luckyaf.imageselection.ImageData;
+import com.luckyaf.imageselection.model.entity.ImageData;
 import com.luckyaf.imageselection.ImageSelection;
-import com.luckyaf.imageselection.SelectionCreator;
+import com.luckyaf.imageselection.callback.ImageGetter;
 
 public class TestImageSelectionActivity extends AppCompatActivity implements View.OnClickListener{
     private Context mContext;
@@ -25,6 +24,8 @@ public class TestImageSelectionActivity extends AppCompatActivity implements Vie
     private CheckBox cbTranslucent;
     private CheckBox cbCamera;
     private CheckBox cbPublic;
+    private CheckBox cbSingle;
+    private CheckBox cbCrop;
     private  EditText editTextNum;
 
     @Override
@@ -38,7 +39,8 @@ public class TestImageSelectionActivity extends AppCompatActivity implements Vie
         cbTranslucent = (CheckBox)findViewById(R.id.cb_translucent);
         cbCamera = (CheckBox)findViewById(R.id.cb_show_camera);
         editTextNum = (EditText)findViewById(R.id.et_number);
-
+        cbSingle = findViewById(R.id.cb_single);
+        cbCrop = findViewById(R.id.cb_crop);
         button.setOnClickListener(this);
 
     }
@@ -50,12 +52,13 @@ public class TestImageSelectionActivity extends AppCompatActivity implements Vie
                 ImageSelection.getInstance()
                         .from(this)
                         .capture(cbCamera.isChecked())
+                        .crop(cbCrop.isChecked())
                         .needGif(false)
                         .translucent(cbTranslucent.isChecked())
-                        .maxSelectable(9)
+                        .maxSelectable(cbSingle.isChecked()?1:9)
                         .themeColor(Color.parseColor("#1E8AE8"))
                         .selectWord("确定")
-                        .getImage(new SelectionCreator.ImageGetter() {
+                        .getImage(new ImageGetter() {
                             @Override
                             public void getImageSuccess(ImageData imageData) {
                                 mTextView.setText(imageData.toString());

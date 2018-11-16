@@ -34,11 +34,15 @@
             android:layout_height="wrap_content"
             android:text="是否显示相机"/>
         <CheckBox
-            android:id="@+id/cb_save_public"
+            android:id="@+id/cb_single"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="是否存放在公共空间"/>
+            android:text="是否单选"/>
+        <CheckBox
+            android:id="@+id/cb_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否裁剪"/>
         <EditText
             android:visibility="gone"
             android:id="@+id/et_number"

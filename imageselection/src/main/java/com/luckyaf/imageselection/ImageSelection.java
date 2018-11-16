@@ -3,6 +3,8 @@ package com.luckyaf.imageselection;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
+import com.luckyaf.imageselection.usecase.PhotoCapturer;
+
 /**
  * 类描述：
  *

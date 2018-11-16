@@ -28,4 +28,5 @@
     <!-- contentDescription -->
     <string name="tip_gif">gif标志</string>
     <string name="image_thumbnail">图片缩略图</string>
+    <string name="title_activity_image_display">ImageDisplayActivity</string>
 </resources>

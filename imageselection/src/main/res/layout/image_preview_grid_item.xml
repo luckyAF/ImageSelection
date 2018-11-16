@@ -3,7 +3,7 @@
                 android:id="@+id/layout_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-    <com.luckyaf.imageselection.internal.ui.widget.RoundedRectangleImageView
+    <com.luckyaf.imageselection.widget.RoundedRectangleImageView
         android:id="@+id/img_selected"
         android:layout_width="40dp"
         android:layout_height="40dp"

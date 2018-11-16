@@ -8,16 +8,16 @@ def gitUrl = 'https://github.com/luckyAF/ImageSelection.git'   //Git仓库的地
 
 group = "com.luckyaf"//发布aar前缀根节点
 
-version = "1.2.33"//发布aar的库版本
+version = "1.2.4"//发布aar的库版本
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 12
+        versionCode 13
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -107,9 +107,12 @@ dependencies {
     implementation "com.android.support:support-annotations:${supportLibVersion}"
     implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
     implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:design:28.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 }
 
 //./gradlew bintrayUpload
 //./gradlew clean build bintrayUpload
+

@@ -1,32 +1,30 @@
 package com.luckyaf.imageselection;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
+import com.luckyaf.imageselection.callback.ImageGetter;
 import com.luckyaf.imageselection.imageLoader.ImageLoader;
-import com.luckyaf.imageselection.internal.entity.SelectionSpec;
-import com.luckyaf.imageselection.internal.utils.SmartJump;
-import com.luckyaf.imageselection.ui.ImageSelectionActivity;
+import com.luckyaf.imageselection.model.entity.ImageData;
+import com.luckyaf.imageselection.model.entity.SelectionSpec;
+import com.luckyaf.imageselection.utils.SmartJump;
+import com.luckyaf.imageselection.activity.ImageDisplayActivity;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
-import static com.luckyaf.imageselection.ui.ImageSelectionActivity.IMAGE_DATA;
+import static com.luckyaf.imageselection.activity.ImageDisplayActivity.IMAGE_DATA;
 
 /**
- * 类描述：
+ * 类描述：图片选择器创建者
  *
  * @author Created by luckyAF on 2017/7/19
  */
 @SuppressWarnings("unused")
 public class SelectionCreator {
 
-    public interface ImageGetter {
-        void getImageSuccess(ImageData imageData);
-    }
+
 
 
     private final SelectionSpec mSelectionSpec;
@@ -35,12 +33,12 @@ public class SelectionCreator {
     private ImageGetter imageGetter;
 
 
-    public SelectionCreator(FragmentActivity activity) {
+    SelectionCreator(FragmentActivity activity) {
         supportFragmentManager = activity.getSupportFragmentManager();
         mSelectionSpec = SelectionSpec.getCleanInstance();
     }
 
-    public SelectionCreator(Fragment fragment) {
+    SelectionCreator(Fragment fragment) {
         supportFragmentManager = fragment.getChildFragmentManager();
         mSelectionSpec = SelectionSpec.getCleanInstance();
 
@@ -54,6 +52,7 @@ public class SelectionCreator {
 
     public SelectionCreator maxSelectable(int maxSelectable) {
         mSelectionSpec.maxSelectable = maxSelectable;
+        mSelectionSpec.single = maxSelectable == 1;
         return this;
     }
 
@@ -62,6 +61,14 @@ public class SelectionCreator {
         mSelectionSpec.capture = capture;
         return this;
     }
+
+
+
+    public SelectionCreator crop(boolean crop) {
+        mSelectionSpec.crop = crop;
+        return this;
+    }
+
 
     public SelectionCreator themeColor(@ColorInt int themeColor) {
         mSelectionSpec.themeColor = themeColor;
@@ -88,10 +95,7 @@ public class SelectionCreator {
         return this;
     }
 
-    public SelectionCreator editable(boolean editable) {
-        mSelectionSpec.editable = editable;
-        return this;
-    }
+
 
     public SelectionCreator setImageLoader(ImageLoader imageLoader) {
         mSelectionSpec.imageLoader = imageLoader;
@@ -104,8 +108,8 @@ public class SelectionCreator {
     }
 
     public void start() {
-
-        SmartJump.with(supportFragmentManager).startForResult(ImageSelectionActivity.class, new SmartJump.Callback() {
+        mSelectionSpec.check();
+        SmartJump.with(supportFragmentManager).startForResult(ImageDisplayActivity.class, new SmartJump.Callback() {
             @Override
             public void onActivityResult(int resultCode, Intent data) {
                 handleResult(resultCode, data);
@@ -116,7 +120,7 @@ public class SelectionCreator {
 
     private void handleResult(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            ImageData imageData = (ImageData) data.getParcelableExtra(IMAGE_DATA);
+            ImageData imageData = data.getParcelableExtra(IMAGE_DATA);
             imageGetter.getImageSuccess(imageData);
         }
     }

@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.luckyaf.imageselection">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.luckyaf.imageselection">
 
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity
-            android:name=".ui.ImageSelectionActivity"
-            android:theme="@style/BaseAppTheme"/>
-        <activity android:name=".internal.ui.ImagePreviewActivity"
-                android:theme="@style/BaseAppTheme"/>
-        <activity android:name=".internal.ui.SelectedPreviewActivity"
-                  android:theme="@style/BaseAppTheme"/>
+
+
         <provider
-            android:name=".internal.utils.ImageSelectionFileProvider"
+            android:name=".utils.ImageSelectionFileProvider"
             android:authorities="${applicationId}.ImageProvider"
             android:exported="false"
             android:grantUriPermissions="true"
@@ -30,6 +24,12 @@
                 android:resource="@xml/image_selection_file_paths"
                 tools:replace="name,resource" />
         </provider>
+
+        <activity
+            android:name=".activity.ImageDisplayActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity android:name=".activity.ImagePreviewActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 
 </manifest>
