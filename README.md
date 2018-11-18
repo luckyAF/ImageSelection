@@ -11,7 +11,7 @@
 
 ## 导入工程
 `
-compile 'com.luckyaf:imageselection:1.2.4'
+compile 'com.luckyaf:imageselection:1.3.0'
 `
 
 ## 使用：
